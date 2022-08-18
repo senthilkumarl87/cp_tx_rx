@@ -44,52 +44,11 @@ int main()
 
     print_char_as_bin(tD_new.txBuff, tD_new.headerByteChunks);
 
-    //std::cout<< "::::"<<tD_new.headerByteChunks;
-
-
-    //int pysz =  get_packet_payload_size(path);
-
-    //printf("payload size:%d", pysz );
-
-    /*
-    //read_packet_xml(path);
-    tinyxml2::XMLDocument doc;
-    uint32_t n = get_packet_header_field_ln(path);
-    uint32_t payloadSize = 80;
-
-    //zeros_arr(int n);
-
-    int *fp;
-    fp = get_packet_header(path);
-
-    fp = append_arr(fp, n, (int)payloadSize);n=++n;
-
-    print_int_arr(fp, n);
-
-    uint32_t tot = sum_int(fp,n);
-    int chunks = tot / 8;
-    int remainder = tot - chunks*8 ;
-
-    std::cout<< "The total size: "<<tot<< " Byte chunks: "<< chunks << " remainder:" << remainder << std::endl;
-
-    int all_chunks;
-    if(remainder != 0)
-        all_chunks = chunks + 1;
-    else
-        all_chunks = chunks;
-
-    char *tx_buff = zeros_char8bit_arr(all_chunks);
-
-    std::cout<< "Tx buffer initialize"<< std::endl;
-
-    print_char8bit_hex_arr(tx_buff, all_chunks);
 
 
 
-    //get_packet_message(path);
-    //print_int_arr(fp,n);
 
-    */
+
     cout << "test tx-rx chain" << endl;
     return 0;
 }
