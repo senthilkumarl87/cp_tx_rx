@@ -46,7 +46,7 @@ int main()
 
     printf("\n");
 
-    std::string str = "this is a test function for transmiter and receiver";
+    std::string str = "this is a test function for transmitter and receiver";
 
     //printf("\n%d\n", str.length());
 
