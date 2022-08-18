@@ -44,8 +44,21 @@ int main()
 
     print_char_as_bin(tD_new.txBuff, tD_new.headerByteChunks);
 
+    printf("\n");
+
+    std::string str = "this is a test function for transmiter and receiver";
+
+    //printf("\n%d\n", str.length());
+
+    std::string binary = "";
+    for (int i=0; i< str.length(); i++) {
+            //std::cout<<str[i]<<std::endl;
+        binary += std::bitset<8>(str[i]).to_string() + ' ';
+    }
 
 
+    //std::string binary = toBinary(str);
+    std::cout << binary << std::endl;
 
 
 

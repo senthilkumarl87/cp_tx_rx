@@ -12,6 +12,9 @@
 
 #include <iomanip>
 
+
+std::string toBinary(std::string const &str);
+
 char insert_byte(char ch, char *chi);
 
 char bit_insert_char(char byte_var, unsigned int index, char bit);
