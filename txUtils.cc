@@ -102,6 +102,29 @@ void fill_header(txData tD, const char *path)
     if(remainder >0 )
     {
 
+
+
+
+        printf("\n");
+        char ch;
+        int kk = 0;
+        int inx = 0;
+
+        ch = tD.txBuff[byte_cnt];
+        for(int i = 8*byte_cnt; i < header_size; i++)
+        {
+            //printf("\n");
+            inx = 8-kk-1;
+            //std::cout<<inx<<"-"<<tmp1[i];
+
+            ch = bit_insert_char(ch , inx, tmp1[i]);
+            ////printf("\n");
+            //std::cout << std::bitset<8>(ch);
+            kk++;
+        }
+        //std::cout << std::bitset<8>(ch);
+
+        tD.txBuff[byte_cnt] = ch;
         print_char_as_bin(tD.txBuff, byte_cnt + 1);
 
     }
