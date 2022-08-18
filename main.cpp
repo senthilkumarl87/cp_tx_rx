@@ -38,8 +38,13 @@ int main()
 
     printf("\nMain. Num Fields: %d\n", tD_new.numFields);
 
-    fill_header(tD_new, path);
+    tD_new = fill_header(tD_new, path);
 
+
+
+    print_char_as_bin(tD_new.txBuff, tD_new.headerByteChunks);
+
+    //std::cout<< "::::"<<tD_new.headerByteChunks;
 
 
     //int pysz =  get_packet_payload_size(path);

@@ -16,6 +16,7 @@ struct fields {
 struct txData{
     char *txBuff;
     int byteChunks;
+    int headerByteChunks;
     int numAppend;
     int *fieldSz;
     uint32_t numFields;

@@ -2,7 +2,7 @@
 
 
 
-void fill_header(txData tD, const char *path)
+txData fill_header(txData tD, const char *path)
 {
     const int n = tD.numFields-1;
 
@@ -18,17 +18,17 @@ void fill_header(txData tD, const char *path)
 
     //std::cout<<"---"<<f1[0].field<<std::endl;
 
-    printf("\nNum Fields: %d\n", n);
+    //printf("\nNum Fields: %d\n", n);
 
     uint32_t header_size=0;
 
     for(uint32_t k=0; k<n; k++)
     {
-        std::cout<<k<<"---"<<f1[k].field<<std::endl;
+        //std::cout<<k<<"---"<<f1[k].field<<std::endl;
         header_size = header_size + f1[k].fieldLn;
     }
 
-    printf("\nThe header size=%d\n", header_size);
+    //printf("\nThe header size=%d\n", header_size);
 
     char *headerData = new char[header_size];
 
@@ -46,7 +46,7 @@ void fill_header(txData tD, const char *path)
         tmp1 = strcat(tmp1, tmp2);
     }
 
-    std::cout <<"===>>"<< tmp1<< std::endl;
+    //std::cout <<"===>>"<< tmp1<< std::endl;
 
 
 
@@ -54,18 +54,18 @@ void fill_header(txData tD, const char *path)
 
 
 
-    std::cout <<"===>>"<< tD.byteChunks<< std::endl;
+    //std::cout <<"===>>"<< tD.byteChunks<< std::endl;
 
-    print_char8bit_hex_arr(tD.txBuff, tD.byteChunks);
+    //print_char8bit_hex_arr(tD.txBuff, tD.byteChunks);
 
 
-    print_char_as_bin(tD.txBuff, tD.byteChunks);
+    //print_char_as_bin(tD.txBuff, tD.byteChunks);
 
 
 
     char carr[8];
     int inx;
-    printf("The header size:%d bytes \n", header_size/8);
+    //printf("The header size:%d bytes \n", header_size/8);
 
     int byte_cnt = header_size/8;
 
@@ -105,7 +105,7 @@ void fill_header(txData tD, const char *path)
 
 
 
-        printf("\n");
+        //printf("\n");
         char ch;
         int kk = 0;
         int inx = 0;
@@ -125,11 +125,14 @@ void fill_header(txData tD, const char *path)
         //std::cout << std::bitset<8>(ch);
 
         tD.txBuff[byte_cnt] = ch;
-        print_char_as_bin(tD.txBuff, byte_cnt + 1);
+        //print_char_as_bin(tD.txBuff, byte_cnt + 1);
+
+        tD.headerByteChunks = byte_cnt + 1;
 
     }
     else{
-        print_char_as_bin(tD.txBuff, byte_cnt);
+        //print_char_as_bin(tD.txBuff, byte_cnt);
+        tD.headerByteChunks = byte_cnt;
     }
 
 
@@ -146,7 +149,7 @@ void fill_header(txData tD, const char *path)
 
 
 
-
+    return tD;
 
 
 }

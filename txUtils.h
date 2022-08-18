@@ -28,4 +28,4 @@ struct txData{
 
 txData get_txData(const char *path);
 
-void fill_header(txData tD, const char *path);
+txData fill_header(txData tD, const char *path);
