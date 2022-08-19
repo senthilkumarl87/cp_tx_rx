@@ -22,21 +22,21 @@ void fill_msg(inp_struct inp, txData tD)
     char tmp;
 
 
-
+    /*
     for(int inx = remaining; inx >= 0;  inx--)
     {
         printf("\n-|%d|-\n", inx);
 
         tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
         std::cout << std::bitset<8>(tmp);
-    }
+    }*/
     //inx = remaining -1;
     //tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
     //std::cout << std::bitset<8>(tmp);
 
     printf("\n\n");
-    print_char_arr((char *)inp.binary, inp.length);
-    printf("\n.....\n");
+    //print_char_arr((char *)inp.binary, inp.length);
+    //printf("\n.....\n");
     int m1;
     int m2;
 
@@ -44,34 +44,108 @@ void fill_msg(inp_struct inp, txData tD)
     m2 = remaining;
 
     char *split_char_inp1 = split_char((char *)inp.binary, m1, m2, inp.length);
-    print_char_arr(split_char_inp1,m2-m1);
+    //print_char_arr(split_char_inp1,m2-m1);
 
-    printf("\n.....\n");
+    //printf("\n..split_char_inp1...\n");
 
 
     m1 = remaining;
     m2 = inp.length;
     char *split_char_inp2 = split_char((char *)inp.binary, m1, m2, inp.length);
-    print_char_arr(split_char_inp2,m2-m1);
+    //print_char_arr(split_char_inp2,m2-m1);
 
+     //printf("\n..split_char_inp2...\n");
 
     int ll = 0;
-    for(int inx = remaining; inx >= 0;  inx--)
+    tmp = tD.txBuff[last];
+    for(int inx = remaining; inx > 0;  inx--)
     {
-        printf("\n-|%d|%d|%c|-\n", inx,ll, split_char_inp1[inx]);
+        //printf("\n-|%d|%d|%c|-\n", inx,ll, split_char_inp1[ll]);
 
-        if(split_char_inp1[inx] == '1'){
+        if(split_char_inp1[ll] == '1'){
 
-            tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
-            std::cout << std::bitset<8>(tmp);
+            tmp = bit_insert_char(tmp,(int)(inx-1),'1');
+            //std::cout << std::bitset<8>(tmp);
             }
-        if(split_char_inp1[inx] == '0'){
+        if(split_char_inp1[ll] == '0'){
 
-            tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'0');
-            std::cout << std::bitset<8>(tmp);
+            tmp = bit_insert_char(tmp,(int)(inx-1),'0');
+            //std::cout << std::bitset<8>(tmp);
             }
 
+        ll++;
     }
+
+    printf("\n------\n");
+
+    tD.txBuff[last] = tmp;
+
+    print_char_as_bin(tD.txBuff, tD.headerByteChunks);
+
+    printf("\n------\n");
+
+    int t = 0;
+    inx = remaining;
+
+    print_char_as_bin(tD.txBuff, tD.byteChunks);
+
+    int msgStart;
+    if(remaining>0){
+        msgStart = tD.headerByteChunks+1;
+    }
+    else {
+        msgStart = tD.headerByteChunks;
+    }
+    printf("\n---cc--\n");
+
+    int kk=remaining;
+
+    for(int i = msgStart; i<msgStart+2;i++){
+
+        std::cout << std::bitset<8>(tD.txBuff[msgStart]);
+        tmp = tD.txBuff[msgStart];
+        for(int cc = 7; cc>=0; cc--){
+            if(inp.binary[kk] == ' ') {
+                kk++;
+                printf("->%c\n", inp.binary[kk]);
+                tmp = bit_insert_char(tmp,(int)(cc),inp.binary[kk]);
+                kk++;
+
+                }
+            else {
+                 printf("\n->%c\n", inp.binary[kk]);
+                 tmp = bit_insert_char(tmp,(int)(cc),inp.binary[kk]);
+                kk++;
+            }
+
+            std::cout << std::bitset<8>(tmp);
+
+
+
+        printf(" \n");
+        }
+    }
+
+    printf("\n-----\n");
+
+    //printf("\n%d\n", t);
+
+       /* for(int ii = remaining; ii<inp.length; ii++)
+         {
+
+
+             if(inp.binary[ii] == ' ')
+             {
+                 printf("\n");
+             }
+
+            else {
+                std::cout<<inp.binary[ii];
+            }
+
+
+         } */
+
 
 
 

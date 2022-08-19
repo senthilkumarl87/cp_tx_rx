@@ -59,7 +59,7 @@
 1660808364 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\xmlconfig.cc
 	"xmlConfig.h"
 
-1660904267 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\bitconfig.cc
+1660909946 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\bitconfig.cc
 	"bitConfig.h"
 
 1660896509 c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\txutils.h
@@ -68,7 +68,7 @@
 	"xmlConfig.h"
 	"struct_classes.h"
 
-1660905561 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\txutils.cc
+1660908854 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\txutils.cc
 	"txUtils.h"
 
 1660896607 c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\struct_classes.h

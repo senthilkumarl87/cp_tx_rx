@@ -42,7 +42,7 @@ inp_struct toBinary(const std::string& str,int N) {
     std::string binary = "";
     for (int i=0; i< N; i++) {
             //std::cout<<str[i]<<std::endl;
-        binary += std::bitset<8>(str[i]).to_string();// + ' ';
+        binary += std::bitset<8>(str[i]).to_string() + ' ';
     }
     //std::cout << binary << std::endl;
 
