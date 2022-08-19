@@ -15,20 +15,64 @@ void fill_msg(inp_struct inp, txData tD)
     printf("\n\n");
 
     int last = tD.headerByteChunks-1;
-    std::cout << std::bitset<8>(tD.txBuff[last]);
+    //std::cout << std::bitset<8>(tD.txBuff[last]);
 
     printf("\n\n");
     int inx = 0;
     char tmp;
-    for(int inx = remaining-1; inx <= 0;  remaining--)
+
+
+
+    for(int inx = remaining; inx >= 0;  inx--)
     {
-        printf("\n-|%d|-\n", remaining);
+        printf("\n-|%d|-\n", inx);
+
+        tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
+        std::cout << std::bitset<8>(tmp);
     }
-    inx = remaining -1;
-    tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
-    std::cout << std::bitset<8>(tmp);
+    //inx = remaining -1;
+    //tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
+    //std::cout << std::bitset<8>(tmp);
 
     printf("\n\n");
+    print_char_arr((char *)inp.binary, inp.length);
+    printf("\n.....\n");
+    int m1;
+    int m2;
+
+    m1 = 0;
+    m2 = remaining;
+
+    char *split_char_inp1 = split_char((char *)inp.binary, m1, m2, inp.length);
+    print_char_arr(split_char_inp1,m2-m1);
+
+    printf("\n.....\n");
+
+
+    m1 = remaining;
+    m2 = inp.length;
+    char *split_char_inp2 = split_char((char *)inp.binary, m1, m2, inp.length);
+    print_char_arr(split_char_inp2,m2-m1);
+
+
+    int ll = 0;
+    for(int inx = remaining; inx >= 0;  inx--)
+    {
+        printf("\n-|%d|%d|%c|-\n", inx,ll, split_char_inp1[inx]);
+
+        if(split_char_inp1[inx] == '1'){
+
+            tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
+            std::cout << std::bitset<8>(tmp);
+            }
+        if(split_char_inp1[inx] == '0'){
+
+            tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'0');
+            std::cout << std::bitset<8>(tmp);
+            }
+
+    }
+
 
 
 }
