@@ -48,17 +48,23 @@ int main()
 
     std::string str = "this is a test function for transmitter and receiver";
 
-    //printf("\n%d\n", str.length());
 
-    std::string binary = "";
-    for (int i=0; i< str.length(); i++) {
-            //std::cout<<str[i]<<std::endl;
-        binary += std::bitset<8>(str[i]).to_string() + ' ';
-    }
+    inp_struct inp = toBinary(str, str.length());
+
+    //int n = sizeof(char_array) / sizeof(char_array[0]);
+
+    for (int i = 0; i < inp.length; i++)
+        std::cout << inp.binary[i];
+    printf("\n-----\n");
+
+    fill_msg(inp, tD_new);
+
+
 
 
     //std::string binary = toBinary(str);
-    std::cout << binary << std::endl;
+    //std::cout << binary << std::endl;
+
 
 
 

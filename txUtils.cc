@@ -1,6 +1,38 @@
 #include "txUtils.h"
 
 
+void fill_msg(inp_struct inp, txData tD)
+{
+
+    printf("\nThe headder size in bits: %d, bytes: %d\n", tD.header_size, tD.headerByteChunks);
+
+    int remaining = 8*tD.headerByteChunks - tD.header_size;
+
+    printf("\n the ramining bit to be filled %d\n", remaining);
+
+    print_char_as_bin(tD.txBuff, tD.headerByteChunks);
+
+    printf("\n\n");
+
+    int last = tD.headerByteChunks-1;
+    std::cout << std::bitset<8>(tD.txBuff[last]);
+
+    printf("\n\n");
+    int inx = 0;
+    char tmp;
+    for(int inx = remaining-1; inx <= 0;  remaining--)
+    {
+        printf("\n-|%d|-\n", remaining);
+    }
+    inx = remaining -1;
+    tmp = bit_insert_char(tD.txBuff[last],(int)(inx-1),'1');
+    std::cout << std::bitset<8>(tmp);
+
+    printf("\n\n");
+
+
+}
+
 
 txData fill_header(txData tD, const char *path)
 {
@@ -27,6 +59,8 @@ txData fill_header(txData tD, const char *path)
         //std::cout<<k<<"---"<<f1[k].field<<std::endl;
         header_size = header_size + f1[k].fieldLn;
     }
+
+    tD.header_size = header_size;
 
     //printf("\nThe header size=%d\n", header_size);
 

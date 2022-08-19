@@ -8,12 +8,15 @@
 #include <iostream>
 #include <bitset>
 #include <stdint.h>
-
+#include <string.h>
+#include "struct_classes.h"
 
 #include <iomanip>
 
 
-std::string toBinary(std::string const &str);
+
+
+inp_struct toBinary(const std::string& str,int N);
 
 char insert_byte(char ch, char *chi);
 

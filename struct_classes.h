@@ -13,11 +13,24 @@ struct fields {
     int fieldLn;
 };
 
+struct inp_struct {
+    const char *binary;
+    int length;
+
+};
+
+struct string_struct {
+    const char *stringChar;
+    int length;
+
+};
+
 struct txData{
     char *txBuff;
     int byteChunks;
     int headerByteChunks;
     int numAppend;
+    int header_size;
     int *fieldSz;
     uint32_t numFields;
 };

@@ -5,12 +5,38 @@
 
 
 
-std::string toBinary(std::string const &str) {
+inp_struct toBinary(const std::string& str,int N) {
+
+    //printf("\n---to binary--%d\n", N);
+
     std::string binary = "";
-    for (char const &c: str) {
-        binary += std::bitset<8>(c).to_string() + ' ';
+    for (int i=0; i< N; i++) {
+            //std::cout<<str[i]<<std::endl;
+        binary += std::bitset<8>(str[i]).to_string() + ' ';
     }
-    return binary;
+    //std::cout << binary << std::endl;
+
+    int n = binary.length();
+
+    //char char_array[n + 1];
+
+    char* char_array = (char*)malloc((n+1) * sizeof(char));
+
+    strcpy(char_array, binary.c_str());
+    //printf("\n-----\n");
+
+    /*
+    for (int i = 0; i < n; i++)
+        std::cout << char_array[i];
+    printf("\n-----\n");*/
+
+    inp_struct inp;// = new inp_struct;
+    inp.binary = char_array;
+    inp.length = n;
+
+
+    return inp;
+
 }
 
 
