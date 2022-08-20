@@ -17,7 +17,9 @@
 
 char *split_char(char* char_array, int m1, int m2, int nn);
 
-inp_struct toBinary(const std::string& str,int N);
+void print_split_char(char* char_array, int m1, int m2, int nn);
+
+inp_struct toBinary(const std::string& str,int N, bool sp);
 
 char insert_byte(char ch, char *chi);
 

@@ -23,13 +23,13 @@
 	<android/log.h>
 	<assert.h>
 
-1660896712 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\main.cpp
+1660983983 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\main.cpp
 	<iostream>
 	"bitConfig.h"
 	"xmlConfig.h"
 	"txUtils.h"
 
-1660903759 c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\bitconfig.h
+1660984039 c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\bitconfig.h
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
@@ -59,7 +59,7 @@
 1660808364 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\xmlconfig.cc
 	"xmlConfig.h"
 
-1660909946 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\bitconfig.cc
+1660983781 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\bitconfig.cc
 	"bitConfig.h"
 
 1660896509 c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\txutils.h
@@ -68,8 +68,8 @@
 	"xmlConfig.h"
 	"struct_classes.h"
 
-1660908854 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\txutils.cc
+1660983571 source:c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\txutils.cc
 	"txUtils.h"
 
-1660896607 c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\struct_classes.h
+1660983511 c:\users\neo\documents\cpp\cpp_tut\cp_tx_rx\struct_classes.h
 

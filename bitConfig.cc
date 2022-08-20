@@ -35,14 +35,52 @@ char *split_char(char* char_array, int m1, int m2, int nn)
 }
 
 
-inp_struct toBinary(const std::string& str,int N) {
+void print_split_char(char* char_array, int m1, int m2, int nn)
+{
+    int ln = m2-m1;
+    //char* char_array_out = (char*)malloc((ln+1) * sizeof(char));
+
+    if( (m1>=0)&&(m2<=nn))
+    {
+        printf("\n");
+        int kk= 0;
+        for(int i=m1; i< m2; i++)
+        {
+            printf("%c", char_array[i]);
+
+            //char_array_out[kk] = char_array[i];
+
+            kk++;
+        }
+
+        printf("\n");
+
+    }
+
+    else{
+        printf("\nMarker is out of range\n");
+    }
+
+
+
+}
+
+
+
+inp_struct toBinary(const std::string& str,int N, bool sp) {
 
     //printf("\n---to binary--%d\n", N);
 
     std::string binary = "";
     for (int i=0; i< N; i++) {
             //std::cout<<str[i]<<std::endl;
-        binary += std::bitset<8>(str[i]).to_string() + ' ';
+        if(sp){
+            binary += std::bitset<8>(str[i]).to_string() + ' ';
+        }
+        else{
+            binary += std::bitset<8>(str[i]).to_string();
+        }
+
     }
     //std::cout << binary << std::endl;
 

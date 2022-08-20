@@ -25,39 +25,63 @@ int main()
 
 
 
-    print_int_arr(tD_new.fieldSz, tD_new.numFields);
+    print_int_arr((int *)tD_new.fieldSz, tD_new.numFields);
+
+    printf("\nheader_size=%d\n", tD_new.header_size);
+
+    printf("\nmsg_size=%d\n", tD_new.msg_size);
+
+
+
+
 
 
     std::cout<<"-------------------------------------------------"<<endl;
 
-    std::cout<< "chunks:"<<tD_new.byteChunks<<endl;
+    //std::cout<< "chunks:"<<tD_new.byteChunks<<endl;
 
-    print_char8bit_hex_arr(tD_new.txBuff, tD_new.byteChunks);
+    //print_char8bit_hex_arr(tD_new.txBuff, tD_new.byteChunks);
 
-    std::cout<<"-------------------------------------------------"<<endl;
+    //std::cout<<"-------------------------------------------------"<<endl;
 
-    printf("\nMain. Num Fields: %d\n", tD_new.numFields);
+    //printf("\nMain. Num Fields: %d\n", tD_new.numFields);
 
     tD_new = fill_header(tD_new, path);
 
+    printf("\nheader: ");
 
-
-    print_char_as_bin(tD_new.txBuff, tD_new.headerByteChunks);
+    print_char_arr(tD_new.headerBin, tD_new.header_size);
 
     printf("\n");
+
+
+
+    //print_char_as_bin(tD_new.txBuff, tD_new.headerByteChunks);
+
+    //printf("\n");
 
     std::string str = "this is a test function for transmitter and receiver";
 
 
-    inp_struct inp = toBinary(str, str.length());
+    inp_struct inp = toBinary(str, str.length(), false);
 
-    //int n = sizeof(char_array) / sizeof(char_array[0]);
+    print_char_arr((char *)inp.binary, inp.length);
 
+    char *packet_msg1 = split_char((char *)inp.binary,0,tD_new.msg_size,inp.length);
+
+    printf("\Msg: ");
+
+    print_char_arr(packet_msg1, tD_new.msg_size);
+
+    printf("\n");
+
+
+    /*
     for (int i = 0; i < inp.length; i++)
         std::cout << inp.binary[i];
     printf("\n-----\n");
 
-    fill_msg(inp, tD_new);
+    fill_msg(inp, tD_new);*/
 
 
 
@@ -68,6 +92,7 @@ int main()
 
 
 
+    printf("\n");
     cout << "test tx-rx chain" << endl;
     return 0;
 }

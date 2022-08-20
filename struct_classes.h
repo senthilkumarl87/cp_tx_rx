@@ -27,10 +27,13 @@ struct string_struct {
 
 struct txData{
     char *txBuff;
+    char *headerBin;
+    char *msgBin;
     int byteChunks;
     int headerByteChunks;
     int numAppend;
     int header_size;
+    int msg_size;
     int *fieldSz;
     uint32_t numFields;
 };

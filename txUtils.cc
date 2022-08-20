@@ -100,6 +100,7 @@ void fill_msg(inp_struct inp, txData tD)
 
     int kk=remaining;
 
+
     for(int i = msgStart; i<tD.byteChunks;i++){
 
 
@@ -132,9 +133,11 @@ void fill_msg(inp_struct inp, txData tD)
 
     printf("\n--inp---\n");
 
-    print_char_arr((char *)inp.binary, inp.length);
+    //print_char_arr((char *)inp.binary, inp.length);
 
-    printf("\n--buffer---\n");
+    print_split_char((char *)inp.binary, remaining,85, inp.length);
+
+    printf("\n--buffer-%d--\n", kk);
 
     print_char_as_bin(tD.txBuff, tD.byteChunks);
 
@@ -191,6 +194,8 @@ txData fill_header(txData tD, const char *path)
         //std::cout << "=>"<<tmp1<<","<< tmp2 << std::endl;
         tmp1 = strcat(tmp1, tmp2);
     }
+
+    tD.headerBin = tmp1;
 
     //std::cout <<"===>>"<< tmp1<< std::endl;
 
@@ -307,22 +312,47 @@ txData get_txData(const char *path)
     uint32_t n = get_packet_header_field_ln(path);
     uint32_t payloadSize = (uint32_t)get_packet_payload_size(path);
 
-    int *fp;
-    fp = get_packet_header(path);
+    //int *fp;
+    tD.fieldSz = get_packet_header(path);
     //printf("\nMain0. Num Fields: %d\n", n);
 
-    fp = append_arr(fp, n, (int)payloadSize);n=n+1;
+    tD.fieldSz = append_arr(tD.fieldSz, n, (int)payloadSize);n=n+1;
 
-    tD.fieldSz = fp;
+    /*printf("\n");
+    print_int_arr(tD.fieldSz,n);
+    printf("\n");*/
+
+    /*for(int i=0; i<n;i++)
+    {
+        tD.fieldSz[i] = fp[i];
+    }*/
+
+    //tD.fieldSz = fp;
+
+    //delete(fp);
 
     tD.numFields = n;
-
+    tD.msg_size = tD.fieldSz[tD.numFields-1];
 
     //print_int_arr(fp, n);
 
-    uint32_t tot = sum_int(fp,n);
+    uint32_t tot = sum_int(tD.fieldSz,n);
     const int chunks = tot / 8;
     const int remainder = tot - chunks*8 ;
+
+    int nn= tD.numFields;
+    int header_size = 0;
+
+    for(int i = 0; i < nn-1; i++)
+    {
+        //printf("\n-%d--\n", tD.fieldSz[i]);
+        header_size = header_size + tD.fieldSz[i];
+    }
+
+    tD.header_size = header_size;
+
+
+
 
     //std::cout<< "The total size: "<<tot<< " Byte chunks: "<< chunks << " remainder:" << remainder << std::endl;
 
