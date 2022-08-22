@@ -179,7 +179,9 @@ int main()
 
     txBufferFill(streamPkt, numPackets);
 
-    printf("\n\n");
+    printf("\n........\n");
+
+    std::cout<<str2Binary(streamPkt[0].tx8bitBuffer,true);
 
 
     //rxCollectStream(streamPkt, numPackets);

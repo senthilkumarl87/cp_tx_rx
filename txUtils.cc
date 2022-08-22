@@ -43,12 +43,9 @@ void txBufferFill(struct txStream txSArr[], int numPackets)
 
         //std::cout<<str2Binary(txSArr[i].tx8bitBuffer,true);
 
-
-
-
-
-
     }
+
+    //std::cout<<str2Binary(txSArr[0].tx8bitBuffer,true);
 
 
 
