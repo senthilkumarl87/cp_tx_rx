@@ -42,6 +42,9 @@ struct txData{
 struct txStream{
     char *msgBin;
     char *headerBin;
+    char *txBuff;
+    std::string tx8bitBuffer;
+    int txBuffLn;
     int msg_length;
     int header_length;
 };

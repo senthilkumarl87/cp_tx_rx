@@ -1,6 +1,60 @@
 #include "txUtils.h"
 #include "rxUtils.h"
 
+std::string BinaryStringToText(std::string binaryString) {
+    std::string text = "";
+    std::stringstream sstream(binaryString);
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        text += char(bits.to_ulong());
+    }
+    return text;
+}
+
+void txBufferFill(struct txStream txSArr[], int numPackets)
+{
+    int i= 0;
+    //printf("\n------------\n");
+    std::string allstr = "";
+    std::string tmp1;
+    std::string tmp2;
+    for(int i = 0; i< 2; i++) {
+        ///Concadinate header and message fields
+        //printf("\n.......\n");
+        tmp1 = char2string(txSArr[i].msgBin, txSArr[i].msg_length);
+        tmp2 = char2string(txSArr[i].headerBin, txSArr[i].header_length);
+        allstr = tmp2 + tmp1;
+        //std::cout<<tmp1<<" "<<tmp2<<std::endl;
+
+        ///String to char
+
+        //printf("\n**Bin string***\n");
+        //std::cout<<allstr;
+        //printf("\n---\n");
+
+        txSArr[i].tx8bitBuffer = BinaryStringToText(allstr);
+        //std::string strBuff_norm = BinaryStringToText(allstr);
+        //std::cout<<BinaryStringToText(allstr);
+
+        //print_string_as_bin(strBuff_norm);
+
+
+        //std::cout<<str2Binary(txSArr[i].tx8bitBuffer,true);
+
+
+
+
+
+
+    }
+
+
+
+}
+
+
 void fill_msg(inp_struct inp, txData tD)
 {
 

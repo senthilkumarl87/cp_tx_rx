@@ -2,7 +2,19 @@
 #include "bitConfig.h"
 
 
+void appendZeros(char *binCharVar,int ln, int padCnt)
+{
+    printf("\nIn zero pading\n");
 
+    for(int i = ln; i < ln+ padCnt; i++)
+    {
+        binCharVar[i] = 0;
+    }
+
+
+
+
+}
 
 void charArrCpy(char *a1, char *a2, int nn)
 {
@@ -120,6 +132,30 @@ inp_struct toBinary(const std::string& str,int N, bool sp) {
 
 }
 
+std::string str2Binary(std::string str, bool sp) {
+
+    //printf("\n---to binary--%d\n", N);
+    int N = str.length();
+    std::string binary = "";
+    for (int i=0; i< N; i++) {
+            //std::cout<<str[i]<<std::endl;
+        if(sp){
+            binary += std::bitset<8>(str[i]).to_string() + ' ';
+        }
+        else{
+            binary += std::bitset<8>(str[i]).to_string();
+        }
+
+    }
+
+
+
+    return binary;
+
+}
+
+
+
 
 char insert_byte(char ch, char *chi)
 {
@@ -142,6 +178,20 @@ char insert_byte(char ch, char *chi)
 
 void print_char_as_bin(char *byte_var, int sz)
 {
+    for(uint32_t i = 0; i<sz; i++)
+    {
+         std::cout << std::bitset<8>(byte_var[i]);
+         if(i!=sz-1)
+            std::cout<<",";
+    }
+    std::cout<<""<<std::endl;
+
+
+}
+
+void print_string_as_bin(std::string byte_var)
+{
+    int sz = byte_var.length();
     for(uint32_t i = 0; i<sz; i++)
     {
          std::cout << std::bitset<8>(byte_var[i]);

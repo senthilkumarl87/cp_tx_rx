@@ -32,7 +32,9 @@
 int binaryToDecimal(std::string n);
 void rxDecodeStream(txStream txS);
 void rxCollectStream(struct txStream txS[], int numPackets);
+std::string setStringtoASCII(std::string str);
 std::string char2string(char* a, int length);
+char *str2char(std::string s, bool byteNorm);
 
 
 

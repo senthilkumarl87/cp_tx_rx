@@ -2,6 +2,51 @@
 
 #include "rxUtils.h"
 
+char *str2char(std::string s, bool byteNorm)
+{
+    int mm = s.length();
+    int nn;
+    char *ch;
+    if(byteNorm)
+    {
+        if(mm % 8 >0 )
+        {
+            nn = mm + (8 - (mm % 8));
+
+        }
+        else{
+            nn = mm;
+        }
+        ch = (char*)malloc((nn+1) * sizeof(char));
+
+        for(int i = 0; i< nn ; i++)
+        {
+            ch[i] = s[i];
+
+            if(i>mm-1){
+                ch[i] = 0;
+            }
+
+
+        }
+
+    }
+    else
+    {
+        char *ch = (char*)malloc((mm+1) * sizeof(char));
+
+        for(int i = 0; i< mm ; i++)
+        {
+            ch[i] = s[i];
+
+        }
+
+
+    }
+
+    return ch;
+}
+
 std::string char2string(char* a, int length)
 {
 

@@ -70,6 +70,8 @@ int main()
 
 
 
+
+
     //printf("\nheader 2:");
     //print_char_arr((char *)tD_new.headerBin, tD_new.header_size);
     //printf("\n");
@@ -175,9 +177,12 @@ int main()
     print_char_arr((char *)inp.binary, inp.length);
     printf("\n");
 
-    //rxDecodeStream(streamPkt[0]);
+    txBufferFill(streamPkt, numPackets);
 
-    rxCollectStream(streamPkt, numPackets);
+    printf("\n\n");
+
+
+    //rxCollectStream(streamPkt, numPackets);
 
 
     /*

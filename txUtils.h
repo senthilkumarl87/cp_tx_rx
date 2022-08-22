@@ -32,3 +32,5 @@ void fill_msg(inp_struct inp, txData tD);
 txData get_txData(const char *path);
 
 txData fill_header(txData tD, const char *path);
+
+void txBufferFill(struct txStream txSArr[], int numPackets);
