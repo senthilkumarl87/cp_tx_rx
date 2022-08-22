@@ -2,6 +2,7 @@
 #include "bitConfig.h"
 #include "xmlConfig.h"
 #include "txUtils.h"
+#include "rxUtils.h"
 
 using namespace std;
 
@@ -58,7 +59,7 @@ int main()
 
     //printf("\n");
 
-    std::string str = "this is a test function for transmitter and receiver";
+    std::string str = "rhis is a test function for transmitter and receiver";
 
 
 
@@ -174,7 +175,7 @@ int main()
     print_char_arr((char *)inp.binary, inp.length);
     printf("\n");
 
-
+    rxDecodeStream(streamPkt[0]);
 
 
     /*
