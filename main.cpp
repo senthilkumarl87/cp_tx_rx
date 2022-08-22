@@ -48,11 +48,9 @@ int main()
 
     tD_new = fill_header(tD_new, path);
 
-    printf("\nheader: ");
-
-    print_char_arr(tD_new.headerBin, tD_new.header_size);
-
-    printf("\n");
+    //printf("\nheader 1:");
+    //print_char_arr((char *)tD_new.headerBin, tD_new.header_size);
+    //printf("\n");
 
 
 
@@ -63,17 +61,120 @@ int main()
     std::string str = "this is a test function for transmitter and receiver";
 
 
-    inp_struct inp = toBinary(str, str.length(), false);
 
-    print_char_arr((char *)inp.binary, inp.length);
 
-    char *packet_msg1 = split_char((char *)inp.binary,0,tD_new.msg_size,inp.length);
+    const inp_struct inp = toBinary(str, str.length(), false);
 
-    printf("\Msg: ");
 
-    print_char_arr(packet_msg1, tD_new.msg_size);
 
+
+
+    //printf("\nheader 2:");
+    //print_char_arr((char *)tD_new.headerBin, tD_new.header_size);
+    //printf("\n");
+
+
+    int first;
+    int last;
+    int nn;
+    const int mm = tD_new.header_size;;
+
+    char *packet_msg2;
+    int numPackets = inp.length/tD_new.msg_size;
+
+    int remainderPkt = inp.length - tD_new.msg_size*numPackets;
+    //printf("\nN=%d,Remainder %d\n", numPackets, remainderPkt);
+
+    if(remainderPkt > 0)
+    {
+        numPackets++;
+    }
+
+
+    struct txStream streamPkt[numPackets];
+
+    //printf("\nheader 3:");
+    //print_char_arr((char *)tD_new.headerBin, tD_new.header_size);
+    //printf("\n");
+
+    ///Packet generation
+    for(int i=1; i<=numPackets; i++){
+
+    //int i= 2;
+    first = (i-1)*tD_new.msg_size;
+    if(i*tD_new.msg_size < inp.length){
+        last = i*tD_new.msg_size;
+    }
+    else {
+            printf("\nPacket ended\n");
+        last = inp.length;
+    }
+
+
+    //printf("\nBoundry- %d- %d-%d\n", i, first, last);
+
+    nn = last - first;
+
+    packet_msg2 = (char*)malloc((nn+1) * sizeof(char));
+    packet_msg2 = split_char((char *)inp.binary,first, last,inp.length);
+
+
+
+
+
+    //printf("\nMsg%d: ", i);
+
+    //print_char_arr(packet_msg2, nn);
+
+
+
+    streamPkt[i-1].header_length = mm;
+    streamPkt[i-1].headerBin = (char*)malloc((mm+1) * sizeof(char));
+    charArrCpy(streamPkt[i-1].headerBin, (char *)tD_new.headerBin, mm);
+
+
+    streamPkt[i-1].msg_length = nn;
+    streamPkt[i-1].msgBin = (char*)malloc((nn+1) * sizeof(char));
+    charArrCpy(streamPkt[i-1].msgBin, packet_msg2, nn);
+
+    //printf("\nMsg::: ");
+
+    /*
+    printf("\nMsg::: ");
+    print_char_arr(packet_msg2, nn);
     printf("\n");
+    print_char_arr(streamPkt[i-1].msgBin, nn);
+    printf("\n"); */
+
+    //strcpy((char *)streamPkt[i-1].msgBin, packet_msg2);
+
+    //strcpy()
+
+
+
+    if(last == inp.length)
+        break;
+
+    }
+
+    printf("\nTest packets\n");
+    for(int inx=0; inx<numPackets; inx++)
+    {
+        printf("\RX Header part:\n");
+        print_char_arr((char *)streamPkt[inx].headerBin, streamPkt[inx].header_length);
+        printf("\n");
+
+        printf("\nRX Message part:\n");
+        print_char_arr((char *)streamPkt[inx].msgBin, streamPkt[inx].msg_length);
+        printf("\n");
+    }
+
+
+    printf("\Input binary\n");
+    print_char_arr((char *)inp.binary, inp.length);
+    printf("\n");
+
+
 
 
     /*

@@ -4,6 +4,19 @@
 
 
 
+void charArrCpy(char *a1, char *a2, int nn)
+{
+    //printf("\ncpy:\n");
+    for(int i=0; i < nn; i++)
+    {
+
+        a1[i]=a2[i];
+        //printf("%c", a2[i]);
+    }
+    //printf("\n---cpy---\n");
+}
+
+
 char *split_char(char* char_array, int m1, int m2, int nn)
 {
     int ln = m2-m1;

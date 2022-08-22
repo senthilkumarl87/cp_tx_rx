@@ -27,8 +27,9 @@ struct string_struct {
 
 struct txData{
     char *txBuff;
-    char *headerBin;
+    const char *headerBin;
     char *msgBin;
+    char *packetBin;
     int byteChunks;
     int headerByteChunks;
     int numAppend;
@@ -37,3 +38,11 @@ struct txData{
     int *fieldSz;
     uint32_t numFields;
 };
+
+struct txStream{
+    char *msgBin;
+    char *headerBin;
+    int msg_length;
+    int header_length;
+};
+

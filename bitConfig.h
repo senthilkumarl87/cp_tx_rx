@@ -14,6 +14,7 @@
 #include <iomanip>
 
 
+void charArrCpy(char *a1, char *a2, int nn);
 
 char *split_char(char* char_array, int m1, int m2, int nn);
 

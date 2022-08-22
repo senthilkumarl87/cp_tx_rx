@@ -195,7 +195,11 @@ txData fill_header(txData tD, const char *path)
         tmp1 = strcat(tmp1, tmp2);
     }
 
-    tD.headerBin = tmp1;
+    tD.headerBin = (char*)malloc((tD.header_size+1) * sizeof(char));
+
+    charArrCpy((char *)tD.headerBin, tmp1, tD.header_size);
+
+    //tD.headerBin = tmp1;
 
     //std::cout <<"===>>"<< tmp1<< std::endl;
 
