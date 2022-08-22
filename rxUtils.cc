@@ -70,14 +70,43 @@ std::string setStringtoASCII(std::string str)
 }
 
 
+
+void rxCollectStream(struct txStream txSArr[], int numPackets)
+{
+    printf("\nrxCollectStream for %d packets\n", numPackets);
+
+
+    std::string data="";
+
+    for(int i=0; i< numPackets; i++)
+    {
+        //printf("\n");
+        data = data + char2string(txSArr[i].msgBin, txSArr[i].msg_length);
+
+        //print_char_arr(txSArr[i].msgBin, txSArr[i].msg_length);
+        //printf("\n");
+        //rxDecodeStream(txSArr[i]);
+
+    }
+    printf("\nOut data:\n");
+
+    std::cout<<setStringtoASCII(data);
+
+
+
+
+}
+
+
+
 void rxDecodeStream(txStream txS)
 {
-    printf("\n-----rx msg-----\n");
-    print_char_arr(txS.msgBin,txS.msg_length);
+    //printf("\n-----rx msg-----\n");
+    //print_char_arr(txS.msgBin,txS.msg_length);
 
     int byteln = txS.msg_length/8;
 
-    printf("\nLn:%d\n", byteln);
+    //printf("\nLn:%d\n", byteln);
 
     string_struct rexMsg_pkt;
 

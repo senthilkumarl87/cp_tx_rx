@@ -59,7 +59,7 @@ int main()
 
     //printf("\n");
 
-    std::string str = "rhis is a test function for transmitter and receiver";
+    std::string str = "This is a test function for transmitter and receiver";
 
 
 
@@ -175,7 +175,9 @@ int main()
     print_char_arr((char *)inp.binary, inp.length);
     printf("\n");
 
-    rxDecodeStream(streamPkt[0]);
+    //rxDecodeStream(streamPkt[0]);
+
+    rxCollectStream(streamPkt, numPackets);
 
 
     /*

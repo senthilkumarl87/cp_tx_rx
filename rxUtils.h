@@ -31,6 +31,7 @@
 
 int binaryToDecimal(std::string n);
 void rxDecodeStream(txStream txS);
+void rxCollectStream(struct txStream txS[], int numPackets);
 std::string char2string(char* a, int length);
 
 
