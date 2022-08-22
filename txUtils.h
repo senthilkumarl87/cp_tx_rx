@@ -26,6 +26,9 @@ struct txData{
     uint32_t numFields;
 };*/
 
+int getNumPackets(std::string str,  const char * path);
+
+void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[]);
 
 void fill_msg(inp_struct inp, txData tD);
 

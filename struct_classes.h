@@ -43,6 +43,7 @@ struct txStream{
     char *msgBin;
     char *headerBin;
     char *txBuff;
+    int numberOfPkt;
     std::string tx8bitBuffer;
     int txBuffLn;
     int msg_length;

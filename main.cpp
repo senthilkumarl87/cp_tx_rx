@@ -11,16 +11,29 @@ int main()
 
     const char * path = "packet.xml";
 
+    std::string str = "This is a test function for transmitter and receiver";
+
+
+    printf("\n----fn test----------\n");
+
+    int numPackets1 = getNumPackets(str,  path);
+
+    printf("\nPktLn:%d\n", numPackets1);
+
+    struct txStream streamPkt1[numPackets1];
+
+    appLayerPkt(str,  path, streamPkt1);
+
+    std::cout<<str2Binary(streamPkt1[0].tx8bitBuffer,true);
+
+
+    printf("\n----fn-test----------\n");
+
+
 
     /*
-    const uint8_t data[] =
-        { 0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x72, 0x79,
-          0x20, 0x73, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x20, 0x74,
-          0x6f, 0x20, 0x62, 0x65, 0x20, 0x77, 0x72, 0x69, 0x74,
-          0x74, 0x65, 0x6e, 0x20, 0x74, 0x6f, 0x20, 0x66, 0x69,
-          0x6c, 0x65 };
-     *
-     */
+
+
 
     txData tD_new =  get_txData(path);
 
@@ -39,42 +52,13 @@ int main()
 
     std::cout<<"-------------------------------------------------"<<endl;
 
-    //std::cout<< "chunks:"<<tD_new.byteChunks<<endl;
-
-    //print_char8bit_hex_arr(tD_new.txBuff, tD_new.byteChunks);
-
-    //std::cout<<"-------------------------------------------------"<<endl;
-
-    //printf("\nMain. Num Fields: %d\n", tD_new.numFields);
 
     tD_new = fill_header(tD_new, path);
-
-    //printf("\nheader 1:");
-    //print_char_arr((char *)tD_new.headerBin, tD_new.header_size);
-    //printf("\n");
-
-
-
-    //print_char_as_bin(tD_new.txBuff, tD_new.headerByteChunks);
-
-    //printf("\n");
-
-    std::string str = "This is a test function for transmitter and receiver";
 
 
 
 
     const inp_struct inp = toBinary(str, str.length(), false);
-
-
-
-
-
-
-
-    //printf("\nheader 2:");
-    //print_char_arr((char *)tD_new.headerBin, tD_new.header_size);
-    //printf("\n");
 
 
     int first;
@@ -123,14 +107,6 @@ int main()
 
 
 
-
-
-    //printf("\nMsg%d: ", i);
-
-    //print_char_arr(packet_msg2, nn);
-
-
-
     streamPkt[i-1].header_length = mm;
     streamPkt[i-1].headerBin = (char*)malloc((mm+1) * sizeof(char));
     charArrCpy(streamPkt[i-1].headerBin, (char *)tD_new.headerBin, mm);
@@ -140,18 +116,7 @@ int main()
     streamPkt[i-1].msgBin = (char*)malloc((nn+1) * sizeof(char));
     charArrCpy(streamPkt[i-1].msgBin, packet_msg2, nn);
 
-    //printf("\nMsg::: ");
 
-    /*
-    printf("\nMsg::: ");
-    print_char_arr(packet_msg2, nn);
-    printf("\n");
-    print_char_arr(streamPkt[i-1].msgBin, nn);
-    printf("\n"); */
-
-    //strcpy((char *)streamPkt[i-1].msgBin, packet_msg2);
-
-    //strcpy()
 
 
 
@@ -181,7 +146,8 @@ int main()
 
     printf("\n........\n");
 
-    std::cout<<str2Binary(streamPkt[0].tx8bitBuffer,true);
+    std::cout<<str2Binary(streamPkt[0].tx8bitBuffer,true); */
+
 
 
     //rxCollectStream(streamPkt, numPackets);
