@@ -46,7 +46,7 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
         last = i*tD_new.msg_size;
     }
     else {
-            printf("\nPacket ended\n");
+        printf("\nPacket ended\n");
         last = inp.length;
     }
 
