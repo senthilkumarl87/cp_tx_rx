@@ -19,10 +19,25 @@ struct inp_struct {
 
 };
 
+struct min_index_int {
+    int minVal;
+    int index;
+};
+
+struct max_index_int {
+    int maxVal;
+    int index;
+};
+
 struct string_struct {
     const char *stringChar;
     int length;
 
+};
+
+struct int_struct {
+    int *intVal;
+    int length;
 };
 
 struct txData{
@@ -50,3 +65,61 @@ struct txStream{
     int header_length;
 };
 
+
+struct channel{
+        int *chId;
+        int *RSSI;
+        int sensitivity;
+        int numCh;
+        bool *chAvail;
+};
+
+struct optCh {
+    int rssi;
+    int chid;
+};
+
+struct mine {
+    char myAdd;
+    char myclusterid;
+    char mycheadId;
+
+};
+
+struct routeTable {
+    int length;
+    char *nodeId;
+    char *nextNodeId;
+    char *cost;
+
+};
+
+struct neighbourTable {
+    int length;
+    char *nodeId;
+    char *cost;
+};
+
+struct rreqPkt {
+    uint16_t seq;
+    char srcNode;
+    char DestnodeId;
+    char pktTyp;
+    uint16_t ttl;
+};
+
+struct rrepPkt {
+    uint16_t seq;
+    char srcNode;
+    char DestnodeId;
+    char pktTyp;
+    uint16_t ttl;
+};
+
+struct dataPkt {
+    uint16_t seq;
+    char srcNode;
+    char DestnodeId;
+    char pktTyp;
+    uint16_t ttl;
+};

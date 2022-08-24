@@ -47,13 +47,13 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
         numPackets++;
     }
 
-    printf("\nnumPackets:%d\n", numPackets);
+    //printf("\nnumPackets:%d\n", numPackets);
 
     //struct txStream streamPkt[numPackets];
 
     for(int i=1; i<=numPackets; i++){
 
-            printf("\nitr:%d\n", i);
+            //printf("\nitr:%d\n", i);
             first = (i-1)*tD_new.msg_size;
             if(i*tD_new.msg_size < inp.length){
                 last = i*tD_new.msg_size;
@@ -102,9 +102,9 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
 
     txBufferFill(streamPkt, numPackets);
 
-    printf("\n....end....\n");
+    //printf("\n....end....\n");
 
-    std::cout<<str2Binary(streamPkt[0].tx8bitBuffer,true);
+    //std::cout<<str2Binary(streamPkt[0].tx8bitBuffer,true);
 
     //return streamPkt;
 
@@ -133,10 +133,10 @@ void txBufferFill(struct txStream txSArr[], int numPackets)
     std::string tmp2;
     for(int i = 0; i< numPackets; i++) {
 
-        printf("\nbuff itr:%d\n", i);
+        //printf("\nbuff itr:%d\n", i);
         ///Concadinate header and message fields
-        printf("\n....itr...\n");
-        std::cout<<txSArr[i].msgBin;
+        //printf("\n....itr...\n");
+        //std::cout<<txSArr[i].msgBin;
         tmp1 = char2string(txSArr[i].msgBin, txSArr[i].msg_length);
         tmp2 = char2string(txSArr[i].headerBin, txSArr[i].header_length);
         allstr = tmp2 + tmp1;
@@ -145,10 +145,10 @@ void txBufferFill(struct txStream txSArr[], int numPackets)
         ///String to char
 
         //printf("\n**Bin string***\n");
-        std::cout<<allstr<<std::endl;
+        //std::cout<<allstr<<std::endl;
         //printf("\n---\n");
 
-        printf("\n----buff %d- %d------\n", i, 1);
+        //printf("\n----buff %d- %d------\n", i, 1);
 
 
         txSArr[i].tx8bitBuffer = "";
@@ -158,7 +158,7 @@ void txBufferFill(struct txStream txSArr[], int numPackets)
 
 
 
-        std::cout<<txSArr[i].tx8bitBuffer<<std::endl;
+        //std::cout<<txSArr[i].tx8bitBuffer<<std::endl;
         //std::string strBuff_norm = BinaryStringToText(allstr);
         //std::cout<<BinaryStringToText(allstr);
 
@@ -169,8 +169,8 @@ void txBufferFill(struct txStream txSArr[], int numPackets)
 
     }
 
-    printf("\n----------\n");
-    std::cout<<str2Binary(txSArr[0].tx8bitBuffer,true);
+    //printf("\n----------\n");
+    //std::cout<<str2Binary(txSArr[0].tx8bitBuffer,true);
 
 
 
