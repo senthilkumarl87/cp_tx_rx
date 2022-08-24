@@ -86,6 +86,13 @@ struct mine {
 
 };
 
+struct cluster {
+    int length;
+    char myclusterid;
+    char *members;
+
+};
+
 struct routeTable {
     int length;
     char *nodeId;
@@ -123,3 +130,7 @@ struct dataPkt {
     char pktTyp;
     uint16_t ttl;
 };
+
+
+
+
