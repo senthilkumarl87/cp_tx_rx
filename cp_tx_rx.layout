@@ -2,34 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="txUtils.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="444" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="..\library_files\tinyxml2\tinyxml2.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="59137" topLine="1921" />
-		</Cursor>
-	</File>
-	<File name="txUtils.cc" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2663" topLine="97" />
-		</Cursor>
-	</File>
-	<File name="xmlConfig.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="285" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="xmlConfig.cc" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1852" topLine="81" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1167" topLine="48" />
+			<Cursor1 position="479" topLine="30" />
 		</Cursor>
 	</File>
 	<File name="..\library_files\tinyxml2\tinyxml2.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -37,24 +12,59 @@
 			<Cursor1 position="0" topLine="354" />
 		</Cursor>
 	</File>
-	<File name="bitConfig.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\library_files\tinyxml2\tinyxml2.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="315" topLine="5" />
+			<Cursor1 position="59137" topLine="1921" />
+		</Cursor>
+	</File>
+	<File name="xmlConfig.cc" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2163" topLine="78" />
 		</Cursor>
 	</File>
 	<File name="bitConfig.cc" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1884" topLine="87" />
+			<Cursor1 position="2429" topLine="135" />
+		</Cursor>
+	</File>
+	<File name="txUtils.cc" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4031" topLine="142" />
 		</Cursor>
 	</File>
 	<File name="struct_classes.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="449" topLine="0" />
+			<Cursor1 position="686" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="rxUtils.cc" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2083" topLine="117" />
+		</Cursor>
+	</File>
+	<File name="bitConfig.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="621" topLine="25" />
+		</Cursor>
+	</File>
+	<File name="xmlConfig.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="285" topLine="16" />
 		</Cursor>
 	</File>
 	<File name="packet.xml" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="446" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="txUtils.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="456" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="rxUtils.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="763" topLine="24" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

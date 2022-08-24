@@ -40,6 +40,8 @@
 		<Unit filename="bitConfig.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="packet.xml" />
+		<Unit filename="rxUtils.cc" />
+		<Unit filename="rxUtils.h" />
 		<Unit filename="struct_classes.h" />
 		<Unit filename="txUtils.cc" />
 		<Unit filename="txUtils.h" />

@@ -8,7 +8,16 @@ int getNumPackets(std::string str,  const char * path)
     tD_new = fill_header(tD_new, path);
     const inp_struct inp = toBinary(str, str.length(), false);
 
-    return inp.length/tD_new.msg_size;
+    int numPackets = inp.length/tD_new.msg_size;
+
+    int remainderPkt = inp.length - tD_new.msg_size*numPackets;
+
+    if(remainderPkt > 0)
+    {
+        numPackets++;
+    }
+
+    return numPackets;
 }
 
 
@@ -29,6 +38,8 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
     char *packet_msg2;
     int numPackets = inp.length/tD_new.msg_size;
 
+    //printf("\nnumPackets:%d\n", numPackets);
+
     int remainderPkt = inp.length - tD_new.msg_size*numPackets;
 
     if(remainderPkt > 0)
@@ -36,41 +47,45 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
         numPackets++;
     }
 
+    printf("\nnumPackets:%d\n", numPackets);
+
     //struct txStream streamPkt[numPackets];
 
     for(int i=1; i<=numPackets; i++){
 
-    //int i= 2;
-    first = (i-1)*tD_new.msg_size;
-    if(i*tD_new.msg_size < inp.length){
-        last = i*tD_new.msg_size;
+            printf("\nitr:%d\n", i);
+            first = (i-1)*tD_new.msg_size;
+            if(i*tD_new.msg_size < inp.length){
+                last = i*tD_new.msg_size;
+            }
+            else {
+                printf("\nPacket ended\n");
+                last = inp.length;
+            }
+
+            nn = last - first;
+
+            packet_msg2 = (char*)malloc((nn+1) * sizeof(char));
+            packet_msg2 = split_char((char *)inp.binary,first, last,inp.length);
+
+
+            streamPkt[i-1].header_length = mm;
+            streamPkt[i-1].headerBin = (char*)malloc((mm+1) * sizeof(char));
+            charArrCpy(streamPkt[i-1].headerBin, (char *)tD_new.headerBin, mm);
+
+
+            streamPkt[i-1].msg_length = nn;
+            streamPkt[i-1].msgBin = (char*)malloc((nn+1) * sizeof(char));
+            charArrCpy(streamPkt[i-1].msgBin, packet_msg2, nn);
+
+            streamPkt[i-1].numberOfPkt = numPackets;
+
+            if(last == inp.length)
+                break;
+
     }
-    else {
-        printf("\nPacket ended\n");
-        last = inp.length;
-    }
 
-    nn = last - first;
-
-    packet_msg2 = (char*)malloc((nn+1) * sizeof(char));
-    packet_msg2 = split_char((char *)inp.binary,first, last,inp.length);
-
-
-    streamPkt[i-1].header_length = mm;
-    streamPkt[i-1].headerBin = (char*)malloc((mm+1) * sizeof(char));
-    charArrCpy(streamPkt[i-1].headerBin, (char *)tD_new.headerBin, mm);
-
-
-    streamPkt[i-1].msg_length = nn;
-    streamPkt[i-1].msgBin = (char*)malloc((nn+1) * sizeof(char));
-    charArrCpy(streamPkt[i-1].msgBin, packet_msg2, nn);
-
-    streamPkt[i-1].numberOfPkt = numPackets;
-
-    if(last == inp.length)
-        break;
-
-    }
+    /*
 
     printf("\nTest packets\n");
     for(int inx=0; inx<numPackets; inx++)
@@ -82,14 +97,14 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
         printf("\nRX Message part:\n");
         print_char_arr((char *)streamPkt[inx].msgBin, streamPkt[inx].msg_length);
         printf("\n");
-    }
+    } */
 
 
     txBufferFill(streamPkt, numPackets);
 
-    //printf("\n........\n");
+    printf("\n....end....\n");
 
-    //std::cout<<str2Binary(streamPkt[0].tx8bitBuffer,true);
+    std::cout<<str2Binary(streamPkt[0].tx8bitBuffer,true);
 
     //return streamPkt;
 
@@ -117,21 +132,33 @@ void txBufferFill(struct txStream txSArr[], int numPackets)
     std::string tmp1;
     std::string tmp2;
     for(int i = 0; i< numPackets; i++) {
+
+        printf("\nbuff itr:%d\n", i);
         ///Concadinate header and message fields
-        //printf("\n.......\n");
-        //std::cout<<txSArr[i].msgBin;
+        printf("\n....itr...\n");
+        std::cout<<txSArr[i].msgBin;
         tmp1 = char2string(txSArr[i].msgBin, txSArr[i].msg_length);
         tmp2 = char2string(txSArr[i].headerBin, txSArr[i].header_length);
         allstr = tmp2 + tmp1;
-        //std::cout<<tmp1<<" "<<tmp2<<std::endl;
+        //std::cout<<tmp2<<" "<<tmp1<<std::endl;
 
         ///String to char
 
         //printf("\n**Bin string***\n");
-        //std::cout<<allstr;
+        std::cout<<allstr<<std::endl;
         //printf("\n---\n");
 
-        txSArr[i].tx8bitBuffer = BinaryStringToText(allstr);
+        printf("\n----buff %d- %d------\n", i, 1);
+
+
+        txSArr[i].tx8bitBuffer = "";
+        txSArr[i].tx8bitBuffer = txSArr[i].tx8bitBuffer + BinaryStringToText(allstr);
+
+
+
+
+
+        std::cout<<txSArr[i].tx8bitBuffer<<std::endl;
         //std::string strBuff_norm = BinaryStringToText(allstr);
         //std::cout<<BinaryStringToText(allstr);
 
@@ -142,7 +169,8 @@ void txBufferFill(struct txStream txSArr[], int numPackets)
 
     }
 
-    //std::cout<<str2Binary(txSArr[0].tx8bitBuffer,true);
+    printf("\n----------\n");
+    std::cout<<str2Binary(txSArr[0].tx8bitBuffer,true);
 
 
 
