@@ -56,6 +56,8 @@ int main()
 
     printf("\n--%cn", clusterId);
 
+    updateNeighbourTable();
+
 
 
 

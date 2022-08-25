@@ -261,3 +261,35 @@ struct optCh getOPtimalLinkId(channel ch)
 
     return od;
 }
+
+void updateNeighbourTable()
+{
+    neighbourTable nt;
+    //nt.nodeId;
+    //nt.length;
+    //nt.cost;
+
+    int numNbrs = 3;
+
+    char nbrs[] = {0x02, 0x03, 0x04};
+    int cost[] = {1, 1, 1};
+    int length = 3;
+
+    nt.length = numNbrs;
+
+    charArrCpy(nt.nodeId, nbrs, nt.length);
+
+    printf("\nNeighbour list\n");
+
+    print_char8bit_hex_arr(nt.nodeId, numNbrs );
+
+
+
+
+
+}
+
+void updateRtTable()
+{
+
+}

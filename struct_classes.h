@@ -104,13 +104,14 @@ struct routeTable {
 struct neighbourTable {
     int length;
     char *nodeId;
-    char *cost;
+    int *cost;
 };
 
 struct rreqPkt {
     uint16_t seq;
     char srcNode;
     char DestnodeId;
+    char nxtNd;
     char pktTyp;
     uint16_t ttl;
 };
@@ -119,6 +120,7 @@ struct rrepPkt {
     uint16_t seq;
     char srcNode;
     char DestnodeId;
+    char nxtNd;
     char pktTyp;
     uint16_t ttl;
 };

@@ -38,6 +38,8 @@
 		<Unit filename="../library_files/tinyxml2/tinyxml2.h" />
 		<Unit filename="bitConfig.cc" />
 		<Unit filename="bitConfig.h" />
+		<Unit filename="linkUtils.cc" />
+		<Unit filename="linkUtils.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="packet.xml" />
 		<Unit filename="rxUtils.cc" />
