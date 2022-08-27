@@ -176,9 +176,9 @@ std::string cpyChar2String(std::string s, char * c, int n)
     }
 }
 
-cluster_struct *getNodeGraph()
+cluster_struct *getNodeGraph(const char * path)
 {
-    const char * path = "nodes.xml";
+    //const char * path = "nodes.xml";
 
     cluster_struct *clstr;
 
@@ -191,29 +191,33 @@ cluster_struct *getNodeGraph()
     tinyxml2::XMLElement* node1 = nodes->FirstChildElement( "node" );
 
     printf("\nNode datails:\n");
-    //std::cout<<node1->Attribute("name");
-
-    printf("numNodes: %d\n", atoi(nodes->Attribute("numNodes")));
 
 
+    //printf("numNodes: %d\n", atoi(nodes->Attribute("numNodes")));
 
+
+    clstr = (cluster_struct *)malloc(sizeof(cluster_struct *));
+    clstr->length = atoi(nodes->Attribute("numNodes"));
+    //printf("numNodes: %d\n",clstr->length);
+    clstr->node = (node_struct *)malloc((clstr->length+1) * sizeof(node_struct));
 
     uint32_t k = 0;
     for(tinyxml2::XMLElement* node = nodes->FirstChildElement( "node" ); node != NULL; node = node->NextSiblingElement( "node" ))
     {
-        printf("-----------Node-%d-------------\n", k);
+        //printf("-----------Node-%d-------------\n", k);
+        //printf( "Name = %d and Nbr count= %d\n", atoi(node->Attribute("name")) , atoi(node->Attribute("numNbrs")) );
+        clstr->node[k].nodeId = atoi(node->Attribute("name"));
+        clstr->node[k].numNbrs = atoi(node->Attribute("numNbrs"));
+        clstr->node[k].nbrs = (uint16_t *)malloc((clstr->node[k].numNbrs+1) * sizeof(uint16_t));
 
-
-
-
-        printf( "Name = %d and Nbr count= %d\n", atoi(node->Attribute("name")) , atoi(node->Attribute("numNbrs")) );
 
         int j = 0;
         for(tinyxml2::XMLElement* Nbr = node->FirstChildElement( "Nbr" ); Nbr != NULL; Nbr = Nbr->NextSiblingElement( "Nbr" ))
             {
 
 
-                printf( "\tNbr Name = %s\n", Nbr->Attribute("name"));
+                //printf( "\tNbr Name = %d\n", atoi(Nbr->Attribute("name")));
+                clstr->node[k].nbrs[j] = atoi(Nbr->Attribute("name"));
 
 
 

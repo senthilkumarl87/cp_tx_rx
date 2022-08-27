@@ -376,7 +376,24 @@ void updateNeighbourTable()
 
     //nodeSim();
 
-    cluster_struct *clstr = getNodeGraph();
+    const char * path = "nodes.xml";
+
+    cluster_struct *clstr = getNodeGraph(path);
+
+    printf("\nOut: %d\n", clstr->length);
+
+    for(int k = 0; k< clstr->length; k++)
+    {
+
+        printf("\nNode:%d(%d Neighbours)\n", clstr->node[k].nodeId, clstr->node[k].numNbrs);
+
+        for(int j = 0; j < clstr->node[k].numNbrs; j++)
+        {
+            printf("\t%d", clstr->node[k].nbrs[j]);
+        }
+    }
+
+
 
 
 

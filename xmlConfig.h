@@ -30,7 +30,8 @@ int * get_packet_header(const char * path);
 void get_packet_message(const char * path);
 
 int get_packet_payload_size(const char * path);
-cluster_struct *getNodeGraph();
+
+cluster_struct *getNodeGraph(const char * path);
 
 
 
