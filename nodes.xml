@@ -1,0 +1,44 @@
+<nodes clusterName = "c1" numNodes = "8">
+<node name="01" numNbrs = "3" >
+    <Nbr name="02"></Nbr>
+    <Nbr name="03"></Nbr>
+    <Nbr name="04"></Nbr>
+</node>
+<node name="02" numNbrs = "3" >
+    <Nbr name="01"></Nbr>
+    <Nbr name="03"></Nbr>
+    <Nbr name="05"></Nbr>
+</node>
+<node name="03" numNbrs = "4" >
+    <Nbr name="01"></Nbr>
+    <Nbr name="02"></Nbr>
+    <Nbr name="04"></Nbr>
+    <Nbr name="06"></Nbr>
+</node>
+<node name="04" numNbrs = "3" >
+    <Nbr name="01"></Nbr>
+    <Nbr name="03"></Nbr>
+    <Nbr name="07"></Nbr>
+</node>
+<node name="05" numNbrs = "3" >
+    <Nbr name="02"></Nbr>
+    <Nbr name="06"></Nbr>
+    <Nbr name="08"></Nbr>
+</node>
+<node name="06" numNbrs = "4" >
+    <Nbr name="03"></Nbr>
+    <Nbr name="05"></Nbr>
+    <Nbr name="07"></Nbr>
+    <Nbr name="08"></Nbr>
+</node>
+<node name="07" numNbrs = "3" >
+    <Nbr name="04"></Nbr>
+    <Nbr name="06"></Nbr>
+    <Nbr name="08"></Nbr>
+</node>
+<node name="08" numNbrs = "3" >
+    <Nbr name="05"></Nbr>
+    <Nbr name="06"></Nbr>
+    <Nbr name="07"></Nbr>
+</node>
+</nodes>

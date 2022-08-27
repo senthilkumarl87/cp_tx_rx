@@ -155,7 +155,7 @@ void get_packet_message(const char * path)
     //tinyxml2::XMLElement* field21 = message->FirstChildElement( "Field" );
     printf( "Message length = %s\n", message->Attribute("numfields"));
     std::cout << "---------------------Message--------------------"<<std::endl;
-    uint32_t k;
+    uint32_t k = 0;
     for(tinyxml2::XMLElement* field = message->FirstChildElement( "Field" ); field != NULL; field = field->NextSiblingElement( "Field" ))
     {
         printf("-----------Field-%d-------------\n", k);
@@ -165,6 +165,75 @@ void get_packet_message(const char * path)
 
         k++;
     }
+
+}
+
+std::string cpyChar2String(std::string s, char * c, int n)
+{
+    for(int i=0; i<n;i++)
+    {
+        s[i]=c[i];
+    }
+}
+
+cluster_struct *getNodeGraph()
+{
+    const char * path = "nodes.xml";
+
+    cluster_struct *clstr;
+
+    tinyxml2::XMLDocument doc;
+
+    doc.LoadFile(path);
+
+    tinyxml2::XMLElement* nodes = doc.FirstChildElement( "nodes" );
+
+    tinyxml2::XMLElement* node1 = nodes->FirstChildElement( "node" );
+
+    printf("\nNode datails:\n");
+    //std::cout<<node1->Attribute("name");
+
+    printf("numNodes: %d\n", atoi(nodes->Attribute("numNodes")));
+
+
+
+
+    uint32_t k = 0;
+    for(tinyxml2::XMLElement* node = nodes->FirstChildElement( "node" ); node != NULL; node = node->NextSiblingElement( "node" ))
+    {
+        printf("-----------Node-%d-------------\n", k);
+
+
+
+
+        printf( "Name = %d and Nbr count= %d\n", atoi(node->Attribute("name")) , atoi(node->Attribute("numNbrs")) );
+
+        int j = 0;
+        for(tinyxml2::XMLElement* Nbr = node->FirstChildElement( "Nbr" ); Nbr != NULL; Nbr = Nbr->NextSiblingElement( "Nbr" ))
+            {
+
+
+                printf( "\tNbr Name = %s\n", Nbr->Attribute("name"));
+
+
+
+
+
+
+                j++;
+
+            }
+
+            //print_uint16bit_arr(clstr->node[k].nbrs, clstr->node[k].numNbrs);
+
+
+
+        k++;
+    }
+
+    return clstr;
+
+
 
 }
 

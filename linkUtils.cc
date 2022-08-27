@@ -262,6 +262,97 @@ struct optCh getOPtimalLinkId(channel ch)
     return od;
 }
 
+void charArrCpyMem(char *a1, char *a2, int n)
+{
+    a1 = (char*)malloc((n+1) * sizeof(char));
+
+    for(int i =0; i< n;i++)
+    {
+        a1[i] = a2[i];
+    }
+}
+
+void uint16ArrCpyMem(uint16_t *a1, uint16_t *a2, int n)
+{
+    a1 = (uint16_t*)malloc((n+1) * sizeof(uint16_t));
+
+    for(int i =0; i< n;i++)
+    {
+        a1[i] = a2[i];
+    }
+}
+
+void nodeSim()
+{
+   /* char arr[][] = {
+                        {0x02, 0x03, 0x04},
+                        {0x01, 0x03, 0x05},
+                        {0x01, 0x02, 0x09, 0x06},
+                        {0x01, 0x03, 0x07},
+                        {0x02, 0x06, 0x08},
+                        {0x03, 0x05, 0x07, 0x08},
+                        {0x04, 0x06, 0x08}
+                    }; */
+
+    node_struct nd;
+    int numNodes = 7;
+    neighbourTable nt[numNodes];
+
+    int numNbrs;
+    int length;
+    int i;
+
+    i =0;
+    numNbrs = 3;
+    int16_t_struct nb[numNodes];
+    uint16_t nbrs1[numNbrs] = {0x02, 0x03, 0x04};
+    uint16ArrCpyMem((uint16_t *)nb[i].intVal, nbrs1, numNbrs);nb[i].length = numNbrs;
+    printf("\nprint struct\n");
+    print_uint16bit_arr((uint16_t *)nb[i].intVal, nb[i].length);
+    printf("\n--print struct--\n");
+
+
+    int cost1[numNbrs] = {1, 1, 1};
+    //length = 3;
+
+
+    nt[i].length = numNbrs;
+    printf("\nNode = %d, Nbr count:%d\n", i, nt[0].length);
+    //nt[i].nodeId = (uint16_t*)malloc((numNbrs+1) * sizeof(uint16_t));
+    nt[i].cost = (int*)malloc((numNbrs+1) * sizeof(int));
+    uint16ArrCpyMem(nt[i].nodeId, nbrs1, nt[i].length);
+    cpyIntArr(nt[i].cost, cost1, nt[i].length);
+    print_uint16bit_arr(nt[i].nodeId, numNbrs );
+
+    /*
+
+    i =1;
+    numNbrs = 3;
+    char nbrs2[numNbrs] = {0x01, 0x03, 0x05};
+
+    int cost2[numNbrs] = {1, 1, 1};
+    //length = numNbrs;
+
+
+    nt[i].length = numNbrs;
+    printf("\nNode = %d, Nbr count:%d\n", i, nt[0].length);
+    nt[i].nodeId = (char*)malloc((numNbrs+1) * sizeof(char));
+    nt[i].cost = (int*)malloc((numNbrs+1) * sizeof(int));
+    charArrCpy(nt[i].nodeId, nbrs2, nt[i].length);
+    cpyIntArr(nt[i].cost, cost2, nt[i].length);
+    print_char8bit_hex_arr(nt[i].nodeId, numNbrs );*/
+
+
+
+
+
+
+
+
+}
+
+
+
 void updateNeighbourTable()
 {
     neighbourTable nt;
@@ -271,23 +362,30 @@ void updateNeighbourTable()
 
     int numNbrs = 3;
 
-    char nbrs[] = {0x02, 0x03, 0x04};
+    uint16_t nbrs[] = {0x02, 0x03, 0x04};
     int cost[] = {1, 1, 1};
     int length = 3;
 
     nt.length = numNbrs;
 
-    charArrCpy(nt.nodeId, nbrs, nt.length);
+    uint16ArrCpyMem(nt.nodeId, nbrs, nt.length);
 
-    printf("\nNeighbour list\n");
+    //printf("\nNeighbour list:\n");
 
-    print_char8bit_hex_arr(nt.nodeId, numNbrs );
+    //print_char8bit_hex_arr(nt.nodeId, numNbrs );
+
+    //nodeSim();
+
+    cluster_struct *clstr = getNodeGraph();
+
 
 
 
 
 
 }
+
+
 
 void updateRtTable()
 {

@@ -41,6 +41,7 @@
 		<Unit filename="linkUtils.cc" />
 		<Unit filename="linkUtils.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="nodes.xml" />
 		<Unit filename="packet.xml" />
 		<Unit filename="rxUtils.cc" />
 		<Unit filename="rxUtils.h" />

@@ -63,5 +63,7 @@ void bit_indexing(int *siz, int arrSize);
 
 int *append_arr(int* aparr, int n, int num);
 
+void print_uint16bit_arr(uint16_t* carr, int n);
+
 
 

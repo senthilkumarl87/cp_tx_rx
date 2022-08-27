@@ -276,6 +276,18 @@ void print_char8bit_hex_arr(char* carr, int n)
     std::cout<<""<<std::endl;
 }
 
+void print_uint16bit_arr(uint16_t* carr, int n)
+{
+    for(int k= 0; k<n; k++)
+    {
+        //std::cout<< std::setw(2) << std::setfill('0') << std::hex << (int)carr[k];
+        printf("%d", carr[k] & 0xff);
+        if (k!=n-1)
+            std::cout<<",";
+
+    }
+    std::cout<<""<<std::endl;
+}
 
 char *zeros_char8bit_arr(int n)
 {
