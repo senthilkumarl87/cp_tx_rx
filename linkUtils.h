@@ -20,9 +20,13 @@ struct int_struct getAvailChIds(channel ch);
 
 struct optCh getOPtimalLinkId(channel ch);
 
-void updateNeighbourTable();
+neighbourTable * updateNeighbourTable();
 
 void updateRtTable();
+
+mine * getMineId();
+
+void routingPath();
 
 
 

@@ -56,7 +56,11 @@ int main()
 
     printf("\n--%cn", clusterId);
 
-    updateNeighbourTable();
+    neighbourTable * nbrTbl = updateNeighbourTable();
+
+    printf("\n\n");
+
+    print_uint16bit_arr(nbrTbl->nodeId, nbrTbl->length);
 
 
 

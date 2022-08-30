@@ -324,6 +324,9 @@ void nodeSim()
     cpyIntArr(nt[i].cost, cost1, nt[i].length);
     print_uint16bit_arr(nt[i].nodeId, numNbrs );
 
+
+
+
     /*
 
     i =1;
@@ -351,36 +354,27 @@ void nodeSim()
 
 }
 
-
-
-void updateNeighbourTable()
+mine * getMineId()
 {
-    neighbourTable nt;
-    //nt.nodeId;
-    //nt.length;
-    //nt.cost;
+    mine *myID = (mine *)malloc(sizeof(mine *));
 
-    int numNbrs = 3;
+    myID->myAdd = 0x01;
+    myID->mycheadId = 0x03;
+    myID->myclusterid = 0x01;
 
-    uint16_t nbrs[] = {0x02, 0x03, 0x04};
-    int cost[] = {1, 1, 1};
-    int length = 3;
+    return myID;
 
-    nt.length = numNbrs;
+}
 
-    uint16ArrCpyMem(nt.nodeId, nbrs, nt.length);
 
-    //printf("\nNeighbour list:\n");
-
-    //print_char8bit_hex_arr(nt.nodeId, numNbrs );
-
-    //nodeSim();
+neighbourTable *updateNeighbourTable()
+{
 
     const char * path = "nodes.xml";
 
     cluster_struct *clstr = getNodeGraph(path);
 
-    printf("\nOut: %d\n", clstr->length);
+    /*printf("\nOut: %d\n", clstr->length);
 
     for(int k = 0; k< clstr->length; k++)
     {
@@ -391,9 +385,42 @@ void updateNeighbourTable()
         {
             printf("\t%d", clstr->node[k].nbrs[j]);
         }
+    }*/
+
+    mine *myId = getMineId();
+
+    //printf("\nMy node ID: %d \n", myId->myAdd);
+
+    neighbourTable *nbrTbl = (neighbourTable *)malloc(sizeof(neighbourTable *));
+
+    for(int k = 0; k< clstr->length; k++)
+    {
+        if(clstr->node[k].nodeId == myId->myAdd)
+        {
+            int numNbrs1 = clstr->node[k].numNbrs;
+
+            nbrTbl->nodeId = (uint16_t *)malloc((numNbrs1+1) * sizeof(uint16_t));
+            nbrTbl->cost = (int *)malloc((numNbrs1+1) * sizeof(int));
+            nbrTbl->length = numNbrs1;
+            //printf("\nMy neighbour: \n");
+            for(int j = 0; j < clstr->node[k].numNbrs; j++)
+            {
+
+
+                nbrTbl->nodeId[j] = clstr->node[k].nbrs[j];
+
+                nbrTbl->cost[j] = 1;
+
+                //printf("\t%d", nbrTbl->nodeId[j]);
+
+            }
+
+            break;
+        }
     }
 
 
+    return nbrTbl;
 
 
 
@@ -406,5 +433,6 @@ void updateNeighbourTable()
 
 void updateRtTable()
 {
+    //mine * getMineId()
 
 }
