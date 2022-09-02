@@ -36,6 +36,8 @@
 		</Compiler>
 		<Unit filename="../library_files/tinyxml2/tinyxml2.cpp" />
 		<Unit filename="../library_files/tinyxml2/tinyxml2.h" />
+		<Unit filename="acnUtil.cc" />
+		<Unit filename="acnUtil.h" />
 		<Unit filename="bitConfig.cc" />
 		<Unit filename="bitConfig.h" />
 		<Unit filename="linkUtils.cc" />

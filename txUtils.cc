@@ -21,7 +21,7 @@ int getNumPackets(std::string str,  const char * path)
 }
 
 
-
+///Application layer - packetization - add headers with each message
 void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[])
 {
     txData tD_new =  get_txData(path);
@@ -33,7 +33,7 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
     int first;
     int last;
     int nn;
-    const int mm = tD_new.header_size;;
+    const int mm = tD_new.header_size;
 
     char *packet_msg2;
     int numPackets = inp.length/tD_new.msg_size;
@@ -62,6 +62,8 @@ void appLayerPkt(std::string str,  const char * path, struct txStream streamPkt[
                 printf("\nPacket ended\n");
                 last = inp.length;
             }
+
+
 
             nn = last - first;
 
@@ -520,6 +522,8 @@ txData get_txData(const char *path)
     const int chunks = tot / 8;
     const int remainder = tot - chunks*8 ;
 
+
+
     int nn= tD.numFields;
     int header_size = 0;
 
@@ -539,8 +543,11 @@ txData get_txData(const char *path)
     int all_chunks;
     if(remainder != 0)
         all_chunks = chunks + 1;
-    else
+    else{
+        //printf("\nRemainder: %d, %d\n", remainder, chunks);
         all_chunks = chunks;
+    }
+
     const int num_chunk = all_chunks;
 
     char *tx_buff = zeros_char8bit_arr(num_chunk);

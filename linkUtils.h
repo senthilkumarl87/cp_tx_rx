@@ -22,12 +22,23 @@ struct optCh getOPtimalLinkId(channel ch);
 
 neighbourTable * updateNeighbourTable();
 
-void updateRtTable();
+neighbourTable *updateNeighbourTableById(uint16_t ndId);
+
+routeTable * updateRtTable();
 
 mine * getMineId();
 
 void routingPath();
 
+void nodeSim(uint16_t src, uint16_t dest);
+
+routeTable * initRtTable(int numNodes, uint16_t ndIds[]);
+
+void insertInRoutingTable(routeTable *rt, uint16_t id, rtRow *rw);
+
+rtRow * getRoutingTableRow(routeTable *rt, uint16_t id);
+
+void printRtRow(rtRow * rw);
 
 
 

@@ -6,7 +6,7 @@
     <Field name="Field4" size = "32">11010010101111001101001010111100</Field>
     <Field name="Field5" size = "64">1101001010111100110100101011110011010010101111001101001010111100</Field>
 </header>
-<message name="parent2" numfields = "4" payLoadSize = "80">
+<message name="parent2" numfields = "4" payLoadSize = "85">
     <Field name="Field1" size = "8">ctext1</Field>
 </message>
 </packet>

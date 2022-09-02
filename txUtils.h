@@ -37,3 +37,5 @@ txData get_txData(const char *path);
 txData fill_header(txData tD, const char *path);
 
 void txBufferFill(struct txStream txSArr[], int numPackets);
+
+std::string BinaryStringToText(std::string binaryString);

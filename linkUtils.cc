@@ -282,7 +282,60 @@ void uint16ArrCpyMem(uint16_t *a1, uint16_t *a2, int n)
     }
 }
 
-void nodeSim()
+int16_t_structV *getNxtNode(uint16_t srcNode, uint16_t DestnodeId)
+{
+    neighbourTable *nbrTbl = updateNeighbourTableById(srcNode);
+
+    printf("\nThe neighbours for node id:%d\n", srcNode);
+
+    print_uint16bit_arr(nbrTbl->nodeId, nbrTbl->length);
+
+    bool isMyNbr = false;
+    int16_t_structV *nxt_nodes = (int16_t_structV *)malloc(sizeof(int16_t_structV *));
+
+    mine *myId = getMineId();
+    if(myId->myAdd == DestnodeId)
+    {
+        nxt_nodes->intVal = (uint16_t *)malloc(sizeof(uint16_t));
+        nxt_nodes->intVal[0] = myId->myAdd;
+        nxt_nodes->length = 1;
+
+        return nxt_nodes;
+    }
+
+
+    for(int i=0; i<nbrTbl->length; i++)
+    {
+        if(nbrTbl->nodeId[i]==DestnodeId)
+        {
+            isMyNbr = true;
+            nxt_nodes->intVal = (uint16_t *)malloc(sizeof(uint16_t));
+            nxt_nodes->intVal[0] = nbrTbl->nodeId[i];
+            nxt_nodes->length = 1;
+            return nxt_nodes;
+            break;
+        }
+    }
+
+    ///Check the routing table, if rt is not present, the broadcast it to all the neighbours
+
+
+
+
+
+
+
+
+    return nxt_nodes;
+
+}
+
+void printRtRow(rtRow * rw)
+{
+    printf("\n|%d|%d|%d|\n", rw->nodeId, rw->nextNodeId, rw->cost);
+}
+
+void nodeSim(uint16_t src, uint16_t dest)
 {
    /* char arr[][] = {
                         {0x02, 0x03, 0x04},
@@ -294,56 +347,60 @@ void nodeSim()
                         {0x04, 0x06, 0x08}
                     }; */
 
-    node_struct nd;
-    int numNodes = 7;
-    neighbourTable nt[numNodes];
+        ///Generate the rreq packet
+        rreqPkt *rq = (rreqPkt *)malloc(sizeof(rreqPkt *));
 
-    int numNbrs;
-    int length;
-    int i;
+        rq->DestnodeId = 0x02;
+        rq->srcNode = 0x01;
 
-    i =0;
-    numNbrs = 3;
-    int16_t_struct nb[numNodes];
-    uint16_t nbrs1[numNbrs] = {0x02, 0x03, 0x04};
-    uint16ArrCpyMem((uint16_t *)nb[i].intVal, nbrs1, numNbrs);nb[i].length = numNbrs;
-    printf("\nprint struct\n");
-    print_uint16bit_arr((uint16_t *)nb[i].intVal, nb[i].length);
-    printf("\n--print struct--\n");
+        rq->seq = 0x01;
 
+        int16_t_structV * nxt_node =  getNxtNode(rq->srcNode, rq->DestnodeId);
 
-    int cost1[numNbrs] = {1, 1, 1};
-    //length = 3;
+        printf("\nNext node for src = %d, dest=%d\n", rq->srcNode, rq->DestnodeId);
 
+        print_uint16bit_arr(nxt_node->intVal, nxt_node->length);
 
-    nt[i].length = numNbrs;
-    printf("\nNode = %d, Nbr count:%d\n", i, nt[0].length);
-    //nt[i].nodeId = (uint16_t*)malloc((numNbrs+1) * sizeof(uint16_t));
-    nt[i].cost = (int*)malloc((numNbrs+1) * sizeof(int));
-    uint16ArrCpyMem(nt[i].nodeId, nbrs1, nt[i].length);
-    cpyIntArr(nt[i].cost, cost1, nt[i].length);
-    print_uint16bit_arr(nt[i].nodeId, numNbrs );
+        //routeTable *rt = updateRtTable();
+
+        int numNodes = 8;
+
+        uint16_t ndIds[numNodes] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+
+        routeTable *rt = initRtTable(numNodes,ndIds);
+
+        printf("\nThe routing table:\n");
+
+        for(int i = 0;i<rt->length; i++){
 
 
+            printf("\n|%d|%d|%d|\n", rt->nodeId[i], rt->nextNodeId[i], rt->cost[i]);
+
+        }
+
+        rtRow *rw = (rtRow *)malloc(sizeof(rtRow));
+        rw->cost = 3;
+        rw->nextNodeId = 0x02;
+        rw->nodeId = 0x03;
+
+        uint16_t id = 0x03;
+
+        insertInRoutingTable(rt, id, rw);
+
+        printf("\nThe routing table(updated):\n");
+
+        for(int i = 0;i<rt->length; i++){
 
 
-    /*
+            printf("\n|%d|%d|%d|\n", rt->nodeId[i], rt->nextNodeId[i], rt->cost[i]);
 
-    i =1;
-    numNbrs = 3;
-    char nbrs2[numNbrs] = {0x01, 0x03, 0x05};
+        }
 
-    int cost2[numNbrs] = {1, 1, 1};
-    //length = numNbrs;
+        rw = getRoutingTableRow(rt, 0x03);
 
+        printf("\n Row of The routing table:\n");
 
-    nt[i].length = numNbrs;
-    printf("\nNode = %d, Nbr count:%d\n", i, nt[0].length);
-    nt[i].nodeId = (char*)malloc((numNbrs+1) * sizeof(char));
-    nt[i].cost = (int*)malloc((numNbrs+1) * sizeof(int));
-    charArrCpy(nt[i].nodeId, nbrs2, nt[i].length);
-    cpyIntArr(nt[i].cost, cost2, nt[i].length);
-    print_char8bit_hex_arr(nt[i].nodeId, numNbrs );*/
+        printRtRow(rw);
 
 
 
@@ -361,6 +418,8 @@ mine * getMineId()
     myID->myAdd = 0x01;
     myID->mycheadId = 0x03;
     myID->myclusterid = 0x01;
+
+
 
     return myID;
 
@@ -430,9 +489,196 @@ neighbourTable *updateNeighbourTable()
 }
 
 
+neighbourTable *updateNeighbourTableById(uint16_t ndId)
+{
 
-void updateRtTable()
+    const char * path = "nodes.xml";
+
+    cluster_struct *clstr = getNodeGraph(path);
+
+    /*printf("\nOut: %d\n", clstr->length);
+
+    for(int k = 0; k< clstr->length; k++)
+    {
+
+        printf("\nNode:%d(%d Neighbours)\n", clstr->node[k].nodeId, clstr->node[k].numNbrs);
+
+        for(int j = 0; j < clstr->node[k].numNbrs; j++)
+        {
+            printf("\t%d", clstr->node[k].nbrs[j]);
+        }
+    }*/
+
+    mine *myId = getMineId();
+
+
+
+    neighbourTable *nbrTbl = (neighbourTable *)malloc(sizeof(neighbourTable *));
+
+    for(int k = 0; k< clstr->length; k++)
+    {
+        if(clstr->node[k].nodeId == ndId)
+        {
+            int numNbrs1 = clstr->node[k].numNbrs;
+
+            nbrTbl->nodeId = (uint16_t *)malloc((numNbrs1+1) * sizeof(uint16_t));
+            nbrTbl->cost = (int *)malloc((numNbrs1+1) * sizeof(int));
+            nbrTbl->length = numNbrs1;
+            //printf("\nMy neighbour: \n");
+            for(int j = 0; j < clstr->node[k].numNbrs; j++)
+            {
+
+
+                nbrTbl->nodeId[j] = clstr->node[k].nbrs[j];
+
+                nbrTbl->cost[j] = 1;
+
+                //printf("\t%d", nbrTbl->nodeId[j]);
+
+            }
+
+            break;
+        }
+    }
+
+
+    return nbrTbl;
+
+
+
+
+
+
+}
+
+
+
+int calCost(int oh, int dr, double pktLoss)
+{
+    //oh = 1;
+
+
+    //double pktSucessRt;
+    double pktSucessRt = 1-pktLoss;
+
+
+    double cost = oh*dr/pktSucessRt;
+
+    return cost;
+}
+
+
+void cpyUInt16Arr2Arrp(uint16_t * t1, uint16_t t2[], int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        t1[i] = t2[i];
+    }
+}
+
+
+
+routeTable * updateRtTable()
 {
     //mine * getMineId()
 
+
+    routeTable * rt = (routeTable *)malloc(sizeof(routeTable));
+
+    rt->length = 8;
+
+    uint16_t ndId[rt->length] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+
+    uint16_t nxtND[rt->length] = {0x01, 0x02, 0x03, 0x04, 0x02, 0x03, 0x04, 0x03};
+
+    uint16_t cost[rt->length] = {0, 1, 1, 1, 2, 2, 2, 3};
+
+    rt->nodeId = (uint16_t *)malloc((rt->length + 1)*sizeof(uint16_t));
+    rt->nextNodeId = (uint16_t *)malloc((rt->length + 1)*sizeof(uint16_t));
+    rt->cost = (uint16_t *)malloc((rt->length + 1)*sizeof(uint16_t));
+
+    cpyUInt16Arr2Arrp(rt->nodeId,ndId, rt->length);
+    cpyUInt16Arr2Arrp(rt->nextNodeId,nxtND, rt->length);
+    cpyUInt16Arr2Arrp(rt->cost,cost, rt->length);
+
+
+
+    return rt;
+
+
 }
+
+void insertInRoutingTable(routeTable *rt, uint16_t id, rtRow *rw)
+{
+    for(int i=0; i<rt->length; i++)
+    {
+        if(rt->nodeId[i] == id)
+        {
+            rt->nextNodeId[i] = rw->nextNodeId;
+            rt->cost[i] = rw->cost;
+        }
+    }
+}
+
+rtRow * getRoutingTableRow(routeTable *rt, uint16_t id)
+{
+    rtRow *rw = (rtRow *)malloc(sizeof(rtRow));
+    for(int i=0; i<rt->length; i++)
+    {
+        if(rt->nodeId[i] == id)
+        {
+            rw->nodeId = rt->nodeId[i];
+            rw->nextNodeId = rt->nextNodeId[i];
+
+            rw->cost =rt->cost[i];
+
+
+
+
+        }
+    }
+    return rw;
+}
+
+routeTable * initRtTable(int numNodes, uint16_t ndIds[])
+{
+    //mine * getMineId()
+
+
+    routeTable * rt = (routeTable *)malloc(sizeof(routeTable));
+
+    rt->length = numNodes;
+
+    uint16_t nxtND[rt->length];
+    uint16_t cost[rt->length];
+
+    for(int i = 0; i< numNodes; i++)
+    {
+        nxtND[i] = 0x00;
+    }
+    for(int i = 0; i< numNodes; i++)
+    {
+        cost[i] = 0;
+    }
+
+     //= {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+
+
+    rt->nodeId = (uint16_t *)malloc((rt->length + 1)*sizeof(uint16_t));
+    rt->nextNodeId = (uint16_t *)malloc((rt->length + 1)*sizeof(uint16_t));
+    rt->cost = (uint16_t *)malloc((rt->length + 1)*sizeof(uint16_t));
+
+    cpyUInt16Arr2Arrp(rt->nodeId,ndIds, rt->length);
+    cpyUInt16Arr2Arrp(rt->nextNodeId,nxtND, rt->length);
+    cpyUInt16Arr2Arrp(rt->cost,cost, rt->length);
+
+
+
+    return rt;
+
+
+}
+
+
+

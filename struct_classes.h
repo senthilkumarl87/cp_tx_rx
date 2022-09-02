@@ -41,6 +41,12 @@ struct int16_t_struct {
 
 };
 
+struct int16_t_structV {
+    uint16_t *intVal;
+    int length;
+
+};
+
 struct string_struct1 {
     char *stringChar;
     int length;
@@ -91,10 +97,22 @@ struct optCh {
     int chid;
 };
 
+struct grf {
+    int lat;
+    int lon;
+    int alt;
+};
+
 struct mine {
     uint16_t myAdd;
     uint16_t myclusterid;
     uint16_t mycheadId;
+    int sensitivity;
+    unsigned int battery;
+    int RSSI_GCS;
+    int pktLoss;
+    grf *MyGeoLoc;
+    grf *GsLoc;
 
 };
 /*
@@ -120,11 +138,21 @@ struct cluster_b {
 
 };*/
 
+
+
 struct routeTable {
     uint16_t length;
     uint16_t *nodeId;
     uint16_t *nextNodeId;
     uint16_t *cost;
+
+};
+
+struct rtRow {
+
+    uint16_t nodeId;
+    uint16_t nextNodeId;
+    uint16_t cost;
 
 };
 

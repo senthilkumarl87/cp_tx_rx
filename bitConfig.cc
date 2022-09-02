@@ -60,6 +60,8 @@ char *split_char(char* char_array, int m1, int m2, int nn)
 }
 
 
+
+
 void print_split_char(char* char_array, int m1, int m2, int nn)
 {
     int ln = m2-m1;
